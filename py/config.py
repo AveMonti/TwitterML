@@ -1,0 +1,3 @@
+#Config file
+DATACOUP_USERNAME = ""
+DATACOUP_PASSWORD = ""
