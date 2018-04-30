@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import StaleElementReferenceException
 #VAR
 driver = webdriver.Chrome("/Users/mateuszchojnacki/Applications/chromedriver")
-dictionaryValue = {'id','path','value'}
+dictionaryValue = {}
 
 def login_twitter(username,password):
     driver.get("https://twitter.com/login")
@@ -58,10 +58,19 @@ def getValueFromTweet():
             try:
                 idValue = twitt.get_attribute("data-tweet-id")
                 pathValue = twitt.get_attribute("data-permalink-path")
-                dictionaryValue.update({'id': idValue,'path': pathValue })
-                print(idValue + "\n" + pathValue)
+                if idValue not in dictionaryValue: #if key exist in dictionary
+                    print(idValue + "\n" + pathValue)
+                    driverForTweet = webdriver.Chrome("/Users/mateuszchojnacki/Applications/chromedriver")
+                    driverForTweet.get("https://twitter.com/" + pathValue)
+                    time.sleep(1)
+                    twittValue = driverForTweet.find_element_by_css_selector("p.TweetTextSize.TweetTextSize--jumbo.js-tweet-text.tweet-text").text
+                    print("\n \n"+twittValue+"\n")
+                    driverForTweet.close()
+                    dictionaryValue.setdefault(idValue, twittValue)
+                    #ToDo send value to NodeJS server by Post
             except StaleElementReferenceException:
                 break
+        print(dictionaryValue)
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         time.sleep(9)
 
