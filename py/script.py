@@ -42,6 +42,7 @@ def openHashtag(hashtag):
         theLatestHashtag = driver.find_elements_by_css_selector("li.AdaptiveFiltersBar-item.u-borderUserColor")
         theLatestHashtag[1].click()
         time.sleep(2)
+        getValueFromTweet()
 
 def getTredHash():
     trendHashTag = driver.find_elements_by_css_selector("li.trend-item.js-trend-item.context-trend-item")
@@ -85,3 +86,4 @@ if __name__ == "__main__":
     username = config.DATACOUP_USERNAME
     password = config.DATACOUP_PASSWORD
     login_twitter(username,password)
+    getTredHash()
