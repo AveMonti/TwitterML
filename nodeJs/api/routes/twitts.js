@@ -18,7 +18,7 @@ res.status(200).json(docs);
 
 router.post('/',(req,res,next) => {
   const twitt = new Twitt({
-    _id: new mongoose.Types.ObjectId(req.body.id),
+    _id: req.body.id,
     value: req.body.value
   });
   twitt

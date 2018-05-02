@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const twittSchema = mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+  _id: Number,
   value: String
 });
 

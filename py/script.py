@@ -5,6 +5,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from twitt import Twitt
+import request
+
 #Exception
 from selenium.common.exceptions import StaleElementReferenceException
 #VAR
@@ -68,6 +71,7 @@ def getValueFromTweet():
                     driverForTweet.close()
                     dictionaryValue.setdefault(idValue, twittValue)
                     #ToDo send value to NodeJS server by Post
+                    request.addTwitts(idValue,twittValue)
             except StaleElementReferenceException:
                 break
         print(dictionaryValue)
